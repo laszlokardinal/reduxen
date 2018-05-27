@@ -1,3 +1,4 @@
+export createHistoryRouter from "./createHistoryRouter.js";
 export match from "./match.js";
 export parseQuery from "./parseQuery.js";
 export parseUrl from "./parseUrl.js";
