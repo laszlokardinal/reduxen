@@ -1,0 +1,8 @@
+.nyc_output
+coverage
+tmp
+.babelrc
+.eslintrc.json
+.gitignore
+.prettierrc
+*.test.js
