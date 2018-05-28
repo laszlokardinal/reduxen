@@ -1,6 +1,7 @@
 .nyc_output
 coverage
 tmp
+src
 .babelrc
 .eslintrc.json
 .gitignore

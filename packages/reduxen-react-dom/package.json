@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "description": "React bindings for reduxen, a redux-first router",
   "main": "index.js",
-  "module": "src/index.js",
   "keywords": [
     "react",
     "redux",

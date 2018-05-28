@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "description": "Redux-first router",
   "main": "index.js",
-  "module": "src/index.js",
   "keywords": [
     "react",
     "redux",
