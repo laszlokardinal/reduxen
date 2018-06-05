@@ -48,10 +48,12 @@ const Link = ({
 
             event.preventDefault();
 
-            dispatch({
-              type: replace ? `${prefix}REPLACE` : `${prefix}PUSH`,
-              payload: parseUrl(to)
-            });
+            if (to[0] === "/" || to[0] === "?" || to[0] === "#") {
+              dispatch({
+                type: replace ? `${prefix}REPLACE` : `${prefix}PUSH`,
+                payload: parseUrl(to)
+              });
+            }
           }}
         >
           {children}
@@ -66,7 +68,20 @@ Link.propTypes = {
   className: PropTypes.string,
   activeClassName: PropTypes.string,
   activePattern: PropTypes.string,
-  to: PropTypes.string.isRequired,
+  to:
+    process.env.NODE_ENV === "production"
+      ? () => {}
+      : (props) => {
+          if (typeof props.to !== "string") {
+            return new Error("Non-string prop `to` supplied to Link");
+          }
+
+          if (!["/", "?", "#"].includes(props.to[0])) {
+            return new Error(
+              "Invalid prop `to` supplied to Link: `to` prop should start with '/', '?' or '#'."
+            );
+          }
+        },
   replace: PropTypes.bool,
   children: PropTypes.node
 };

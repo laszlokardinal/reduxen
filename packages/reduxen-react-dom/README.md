@@ -26,7 +26,7 @@ Must be embedded inside a `<RouterProvider />` in the component tree.
 
 Props:
 
-* **to** String url to navigate to (required to start with /)
+* **to** String url to navigate to (required to start with `/`, `?` or `#`)
 * **replace** _(optional)_ If true, the component dispatches `REPLACE` instead of `PUSH`.
   Defaults to false
 * **children** _(optional)_ Children nodes to be rendered inside the \<a /\>

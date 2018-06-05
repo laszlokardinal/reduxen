@@ -233,4 +233,21 @@ describe("Link", () => {
 
     expect(dispatch.callCount).to.equal(0);
   });
+
+  it("does not dispatch anything if to prop is invalid", () => {
+    const dispatch = sinon.spy();
+    const preventDefault = sinon.spy();
+
+    const outerWrapper = shallow(<Link to="kalács" />);
+    const ConsumerMethod = outerWrapper.prop("children");
+    const wrapper = shallow(
+      <ConsumerMethod router={router} dispatch={dispatch} prefix={prefix} />
+    );
+
+    expect(dispatch.callCount).to.equal(0);
+
+    wrapper.prop("onClick")({ preventDefault: () => null, button: 0 });
+
+    expect(dispatch.callCount).to.equal(0);
+  });
 });
