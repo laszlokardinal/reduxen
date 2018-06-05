@@ -1,6 +1,6 @@
 {
   "name": "reduxen-react-dom",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "React bindings for reduxen, a redux-first router",
   "main": "index.js",
   "keywords": [

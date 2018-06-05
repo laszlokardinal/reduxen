@@ -1,6 +1,6 @@
 {
   "name": "reduxen",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Redux-first router",
   "main": "index.js",
   "keywords": [

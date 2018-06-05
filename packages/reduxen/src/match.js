@@ -4,7 +4,11 @@ const match = (pattern, path) => {
   const matchPattern = (path) => {
     const pathParts = path.split("/").slice(1);
 
-    if (patternParts.length > pathParts.length) {
+    if (
+      patternParts.length > pathParts.length &&
+      patternParts.length + 1 !== pathParts.length &&
+      patternParts.slice(-1)[0] !== "*"
+    ) {
       return null;
     }
 

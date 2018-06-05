@@ -53,6 +53,11 @@ describe("match()", () => {
       },
       {
         pattern: "/posts/*",
+        path: "/posts",
+        expectedReturn: {}
+      },
+      {
+        pattern: "/posts/*",
         path: "/posts/7",
         expectedReturn: {}
       },
@@ -123,11 +128,11 @@ describe("match()", () => {
         path: "/users/:id/:tab(posts|about)"
       },
       { pattern: "/a/b/c/d", path: "/a/b/x/y" },
-      { pattern: "/posts/*", path: "/posts" },
+      { pattern: "/posts/*", path: "/" },
       { pattern: "/posts/*", path: "/users" },
       { pattern: "/posts/*", path: "/users/17" },
       { pattern: "/posts/*", path: "/users/17/about" },
-      { pattern: "/posts/:id/comments/*", path: "/posts/19/comments" },
+      { pattern: "/posts/:id/comments/*", path: "/posts/19" },
       { pattern: "/posts/:id/comments/*", path: "/posts/19/reactions/17" },
       { pattern: "/posts/:id/comments/*", path: "/posts/19/author/17/about" }
     ].forEach(({ pattern, path }) =>
