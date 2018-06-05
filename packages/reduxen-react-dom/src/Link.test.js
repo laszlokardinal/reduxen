@@ -118,7 +118,7 @@ describe("Link", () => {
 
     expect(dispatch.callCount).to.equal(0);
 
-    wrapper.prop("onClick")({ preventDefault });
+    wrapper.prop("onClick")({ preventDefault, button: 0 });
 
     expect(dispatch.args).to.deep.equal([
       [
@@ -145,7 +145,7 @@ describe("Link", () => {
 
     expect(dispatch.callCount).to.equal(0);
 
-    wrapper.prop("onClick")({ preventDefault });
+    wrapper.prop("onClick")({ preventDefault, button: 0 });
 
     expect(dispatch.args).to.deep.equal([
       [
@@ -158,5 +158,79 @@ describe("Link", () => {
       ]
     ]);
     expect(preventDefault.callCount).to.equal(1);
+  });
+
+  it("does not dispatch anything if the event has truthy defaultPrevented", () => {
+    const dispatch = sinon.spy();
+    const preventDefault = sinon.spy();
+
+    const outerWrapper = shallow(<Link to="/users/192" />);
+    const ConsumerMethod = outerWrapper.prop("children");
+    const wrapper = shallow(
+      <ConsumerMethod router={router} dispatch={dispatch} prefix={prefix} />
+    );
+
+    expect(dispatch.callCount).to.equal(0);
+
+    wrapper.prop("onClick")({
+      preventDefault: () => null,
+      button: 0,
+      defaultPrevented: true
+    });
+
+    expect(dispatch.callCount).to.equal(0);
+  });
+
+  it("does not dispatch anything if modifier keys are active", () => {
+    const dispatch = sinon.spy();
+    const preventDefault = sinon.spy();
+
+    const outerWrapper = shallow(<Link to="/users/192" />);
+    const ConsumerMethod = outerWrapper.prop("children");
+    const wrapper = shallow(
+      <ConsumerMethod router={router} dispatch={dispatch} prefix={prefix} />
+    );
+
+    expect(dispatch.callCount).to.equal(0);
+
+    wrapper.prop("onClick")({
+      preventDefault: () => null,
+      button: 0,
+      metaKey: true
+    });
+    wrapper.prop("onClick")({
+      preventDefault: () => null,
+      button: 0,
+      altKey: true
+    });
+    wrapper.prop("onClick")({
+      preventDefault: () => null,
+      button: 0,
+      ctrlKey: true
+    });
+    wrapper.prop("onClick")({
+      preventDefault: () => null,
+      button: 0,
+      shiftKey: true
+    });
+
+    expect(dispatch.callCount).to.equal(0);
+  });
+
+  it("does not dispatch anything if button of the event is not 0", () => {
+    const dispatch = sinon.spy();
+    const preventDefault = sinon.spy();
+
+    const outerWrapper = shallow(<Link to="/users/192" />);
+    const ConsumerMethod = outerWrapper.prop("children");
+    const wrapper = shallow(
+      <ConsumerMethod router={router} dispatch={dispatch} prefix={prefix} />
+    );
+
+    expect(dispatch.callCount).to.equal(0);
+
+    wrapper.prop("onClick")({ preventDefault: () => null, button: 1 });
+
+    expect(dispatch.callCount).to.equal(0);
   });
 });

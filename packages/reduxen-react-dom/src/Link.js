@@ -35,6 +35,17 @@ const Link = ({
           style={style}
           className={finalClassName}
           onClick={(event) => {
+            if (
+              event.defaultPrevented ||
+              event.metaKey ||
+              event.altKey ||
+              event.ctrlKey ||
+              event.shiftKey ||
+              event.button !== 0
+            ) {
+              return true;
+            }
+
             event.preventDefault();
 
             dispatch({
